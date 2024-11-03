@@ -1,22 +1,24 @@
 #ifndef PHONE_H
   #define PHONE_H
 
+#include "Contact.hpp"
+#include <iostream>
+#include <cctype>
+#include <string>
+#include <unistd.h>
+#include <cstdlib>
+#include <iomanip>
+#include <cstdio>
 class Phonebook
 {
   public:
-  Contact[8];
+    Phonebook() : latest_index(0) {}
+    void add_new_contact(std::string data[8]);
+    void get_contact(int index);
 
-  void  add();
-  void  search();
-  void  exit();
+  private:
+    Contact contacts_array[8];
+    int latest_index;
+};
 
-}
-
-class Contact
-{
-  std::string   first_name;
-  std::string   last_name;
-  std::string   nichname;
-  std::string   phone;
-
-}
+#endif
