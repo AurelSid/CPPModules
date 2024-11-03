@@ -13,8 +13,8 @@ class Phonebook
 {
   public:
     Phonebook() : latest_index(0) {}
-    void add_new_contact(std::string data[8]);
-    void get_contact(int index);
+    void add_new_contact(void);
+    void get_contact(void);
 
   private:
     Contact contacts_array[8];
