@@ -5,18 +5,29 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: asideris <asideris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/11 14:51:00 by roko              #+#    #+#             */
-/*   Updated: 2025/01/02 12:56:44 by asideris         ###   ########.fr       */
+/*   Created: 2025/01/02 13:26:20 by asideris          #+#    #+#             */
+/*   Updated: 2025/01/02 13:48:18 by asideris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#include <iostream>
+#include <unistd.h>
 
 int	main(void)
 {
-	Zombie *z_1;
-	z_1 = newZombie("z_ 1");
-	delete z_1;
-	randomChump("z_2");
+	std::string str;
+	std::string *str_ptr;
+	std::string &str_ref = str;
+	str_ptr = &str;
+
+	str = "HI THIS IS BRAIN";
+
+	std::cout << &str << std::endl;
+	std::cout << str_ptr << std::endl;
+	std::cout << &str_ref << std::endl;
+
+	std::cout << str << std::endl;
+	std::cout << *str_ptr << std::endl;
+	std::cout << str_ref << std::endl;
 	return (0);
 }

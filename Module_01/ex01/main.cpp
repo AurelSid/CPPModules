@@ -6,7 +6,7 @@
 /*   By: asideris <asideris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 14:51:00 by roko              #+#    #+#             */
-/*   Updated: 2025/01/02 12:56:44 by asideris         ###   ########.fr       */
+/*   Updated: 2025/01/02 13:03:31 by asideris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	main(void)
 {
-	Zombie *z_1;
-	z_1 = newZombie("z_ 1");
-	delete z_1;
-	randomChump("z_2");
+	Zombie *first_zombie;
+	first_zombie = zombieHorde(5, "chump");
+	for (int i = 0; i < 5; i++)
+		first_zombie[i].announce();
 	return (0);
 }
