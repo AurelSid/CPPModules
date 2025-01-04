@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asideris <asideris@student.42.fr>          +#+  +:+       +#+        */
+/*   By: roko <roko@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 17:16:51 by asideris          #+#    #+#             */
-/*   Updated: 2025/01/04 18:33:42 by asideris         ###   ########.fr       */
+/*   Updated: 2025/01/04 18:40:40 by roko             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,4 @@ int	main(void)
 // Destructor called
 // Destructor called
 // Destructor called
-// $>
+// $
