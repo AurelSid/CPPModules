@@ -31,4 +31,12 @@ class ClapTrap
 	int _attack_damage = 10;
 };
 
+class ScavTrap : public ClapTrap
+{
+  public:
+	ScavTrap(std::string name) : ClapTrap(name){};
+
+  private:
+};
+
 #endif
