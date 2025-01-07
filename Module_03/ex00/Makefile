@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: asideris <asideris@student.42.fr>          +#+  +:+       +#+         #
+#    By: roko <roko@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/11 14:51:00 by roko              #+#    #+#              #
-#    Updated: 2025/01/04 17:27:53 by asideris         ###   ########.fr        #
+#    Updated: 2025/01/07 13:33:59 by roko             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ CXXFLAGS = -Wall -Wextra -Werror -std=c++17
 TARGET = my_program
 
 # Source files and object files
-SRCS = main.cpp Fixed.cpp
+SRCS = main.cpp ClapTrap.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 # Default target
