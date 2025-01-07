@@ -6,13 +6,13 @@
 /*   By: roko <roko@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 12:28:48 by roko              #+#    #+#             */
-/*   Updated: 2025/01/07 13:32:53 by roko             ###   ########.fr       */
+/*   Updated: 2025/01/07 13:46:52 by roko             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap(std::string name) : name(name)
+ClapTrap::ClapTrap(std::string name) : _name(name)
 {
 	std::cout << "Constructor called" << std::endl;
 }
@@ -22,15 +22,18 @@ ClapTrap::~ClapTrap()
 }
 void ClapTrap::attack(const std::string &target)
 {
-	std::cout << this->_name << "attacks" << target << "for" << this->_attack_damage << "points" << std::endl;
+	std::cout << this->_name << " attacks " << target << " for " << this->_attack_damage << " points " << std::endl;
 }
 void ClapTrap::takeDamage(unsigned int amount)
 {
-	std::cout << "Destructor called" << std::endl;
+	std::cout << this->_name << "took damage"
+				<< "remaining hit points :" << this->_hit_points << std::endl;
+	this->_hit_points = this->_hit_points - amount;
 }
 void ClapTrap::beReapaired(unsigned int amount)
 {
-	std::cout << "Destructor called" << std::endl;
+	std::cout << this->_name << "is repaired for :" << amount << "points" << std::endl;
+	this->_energy_points += amount;
 }
 std::string ClapTrap::get_name()
 {
