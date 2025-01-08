@@ -6,7 +6,7 @@
 /*   By: roko <roko@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 12:28:48 by roko              #+#    #+#             */
-/*   Updated: 2025/01/07 16:32:39 by roko             ###   ########.fr       */
+/*   Updated: 2025/01/08 17:20:02 by roko             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ ClapTrap &ClapTrap::operator=(ClapTrap const &other)
 ClapTrap::~ClapTrap()
 {
 	std::cout << "===================" << std::endl;
-	std::cout << "Destructor called" << std::endl;
+	std::cout << this->_name << " was destroyed" << std::endl;
 }
 void ClapTrap::attack(const std::string &target)
 {
@@ -59,6 +59,8 @@ void ClapTrap::beReapaired(unsigned int amount)
 	this->_energy_points += amount;
 }
 
+///////////////// GETS
+
 int ClapTrap::get_hit_points(void) const
 {
 	return (this->_hit_points);
@@ -71,6 +73,12 @@ int ClapTrap::get_attack_damage(void) const
 {
 	return (this->_attack_damage);
 }
+std::string ClapTrap::get_name() const
+{
+	return (this->_name);
+}
+
+/////////////////////////////////// SETS
 
 void ClapTrap::set_hit_points(int val)
 {
@@ -84,3 +92,7 @@ void ClapTrap::set_attack_damage(int val)
 {
 	this->_attack_damage = val;
 }
+void ClapTrap::set_name(std::string name)
+{
+	this->_name = name;
+};
