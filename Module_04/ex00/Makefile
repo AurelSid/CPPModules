@@ -6,7 +6,7 @@
 #    By: roko <roko@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/11 14:51:00 by roko              #+#    #+#              #
-#    Updated: 2025/01/09 13:46:03 by roko             ###   ########.fr        #
+#    Updated: 2025/01/09 19:21:24 by roko             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ CXXFLAGS = -Wall -Wextra -Werror -std=c++17
 TARGET = my_program
 
 # Source files and object files
-SRCS = main.cpp Dog.cpp Cat.cpp Animal.cpp
+SRCS = main.cpp Dog.cpp Cat.cpp Animal.cpp WrongAnimal.cpp WrongCat.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 # Default target
