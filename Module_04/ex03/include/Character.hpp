@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   AMateria.cpp                                       :+:      :+:    :+:   */
+/*   Character.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: roko <roko@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/10 16:13:17 by roko              #+#    #+#             */
-/*   Updated: 2025/01/10 17:12:26 by roko             ###   ########.fr       */
+/*   Created: 2025/01/10 16:26:24 by roko              #+#    #+#             */
+/*   Updated: 2025/01/10 16:36:09 by roko             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/AMateria.hpp"
+#ifndef CHARACTER_H
+# define CHARCATER_H
 
-AMateria::AMateria()
+# include "AMateria.hpp"
+# include <iostream>
+# include <string>
+
+class ICharacter
 {
-	std::cout << "Materia def construtor called" << std::endl;
-}
-AMateria::AMateria(AMateria &other)
-{
-	if (this != &other)
+  public:
+	virtual ~ICharacter()
 	{
-		std::cout << "Materia copy construtor called" << std::endl;
-		this->type = other.getType();
 	}
-}
-AMateria::AMateria(std::string const &type) : type(type)
-{
-	std::cout << "Materia def construtor called" << std::endl;
-}
+	virtual std::string const &getName() const = 0;
+	virtual void equip(AMateria *m) = 0;
+	virtual void unequip(int idx) = 0;
+	virtual void use(int idx, ICharacter &target) = 0;
+};
+
+#endif

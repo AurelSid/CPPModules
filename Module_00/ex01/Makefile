@@ -1,26 +1,19 @@
-
-NAME = megaphone
-
-SRCS = phonebook.cpp
-OBJS = ${SRCS:.cpp=.o}
-
-CC = c++
-CFLAGS = -Wall -Wextra -Werror -std=c++98
+#SRC= $(wildcard ./src/*.cpp)
+SRC= $(wildcard *.cpp)
+NAME= my_program
+OBJ= $(SRC:.cpp=.o)
 
 all: $(NAME)
 
-.cpp.o:
-	$(CC) $(CFLAGS) -c $< -o $(<:.cpp=.o)
-
-$(NAME): $(OBJS)
-	$(CC) $(OBJS) $(CFLAGS) -o $(NAME)
+$(NAME): $(OBJ)
+	c++ -Wall -Wextra -Werror -std=c++98 $(OBJ) -o $(NAME)
 
 clean:
-	@$(RM)  $(OBJS)
+	rm -rf $(OBJ)
 
 fclean: clean
-	@$(RM) $(NAME)
+	rm -rf $(NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: 
