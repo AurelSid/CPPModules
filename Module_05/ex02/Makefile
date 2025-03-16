@@ -6,7 +6,7 @@
 #    By: roko <roko@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/11 14:51:00 by roko              #+#    #+#              #
-#    Updated: 2025/03/15 12:26:27 by roko             ###   ########.fr        #
+#    Updated: 2025/03/16 13:27:53 by roko             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
 TARGET = my_program
 
-SRCS = main.cpp  Form.cpp Bureaucrat.cpp 
+SRCS = src/main.cpp  src/AForm.cpp src/Bureaucrat.cpp src/PresidentialPardonForm.cpp \
+		src/RobotomyRequestForm.cpp src/ShrubberyCreationForm.cpp  
 OBJS = $(SRCS:.cpp=.o)
 
 all: $(TARGET)
@@ -27,7 +28,7 @@ $(TARGET): $(OBJS)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -f $(OBJS) $(TARGET) && rm example.txt
 
 re: clean all
 

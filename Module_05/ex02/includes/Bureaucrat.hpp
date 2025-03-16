@@ -6,19 +6,19 @@
 /*   By: roko <roko@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 12:46:39 by roko              #+#    #+#             */
-/*   Updated: 2025/03/15 12:32:10 by roko             ###   ########.fr       */
+/*   Updated: 2025/03/15 14:35:28 by roko             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUREAUCRAT_HPP
 #define BUREAUCRAT_HPP
 
-#include "Form.hpp"
+#include "AForm.hpp"
 #include <string>
 #include <iostream>
 #include <exception>
 
-class Form;
+class AForm;
 class Bureaucrat
 {
 private:
@@ -45,7 +45,7 @@ public:
 
     void grade_Increment(void);
     void grade_Decrement(void);
-    void signForm(Form &form);
+    void signAForm(AForm &AForm);
 
     Bureaucrat &operator=(Bureaucrat &other);
 };

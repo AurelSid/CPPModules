@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.cpp                                           :+:      :+:    :+:   */
+/*   AForm.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: roko <roko@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,44 +10,44 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Form.hpp"
+#include "../includes/AForm.hpp"
 
 // Constructos
-Form::Form(const std::string name, int grade_to_sign, int grade_to_exec) : name(name), grade_to_sign(grade_to_sign), grade_to_exec(grade_to_exec), _signed(false)
+AForm::AForm(const std::string name, int grade_to_sign, int grade_to_exec) : name(name), grade_to_sign(grade_to_sign), grade_to_exec(grade_to_exec), _signed(false)
 {
 }
 // Copy_Constructor
-Form::Form(const Form &other)
+AForm::AForm(const AForm &other)
     : name(other.getName()),
       grade_to_sign(other.getSignGrade()),
       grade_to_exec(other.getExecGrade()),
       _signed(other._signed)
 {
-    std::cout << "Form copy constructor called." << std::endl;
+    std::cout << "AForm copy constructor called." << std::endl;
 }
 // Destructor
-Form::~Form()
+AForm::~AForm()
 {
-    std::cout << "Form destructor called." << std::endl;
+    std::cout << "AForm destructor called." << std::endl;
 }
 // Exceptions
-const char *Form::GradeTooHighException::what() const throw()
+const char *AForm::GradeTooHighException::what() const throw()
 {
     return ("Beaurocrats grade is too high!");
 }
 
-const char *Form::GradeTooLowException::what() const throw()
+const char *AForm::GradeTooLowException::what() const throw()
 {
     return ("Beaurocrats grade is too low!");
 }
 // Getters
 
-bool Form::getSigned(void) const { return (this->_signed); };
-int Form::getExecGrade(void) const { return (this->grade_to_exec); };
-int Form::getSignGrade(void) const { return (this->grade_to_sign); };
-const std::string Form::getName(void) const { return (this->name); };
+bool AForm::getSigned(void) const { return (this->_signed); };
+int AForm::getExecGrade(void) const { return (this->grade_to_exec); };
+int AForm::getSignGrade(void) const { return (this->grade_to_sign); };
+const std::string AForm::getName(void) const { return (this->name); };
 // Operator overload
-Form &Form::operator=(Form &other)
+AForm &AForm::operator=(AForm &other)
 {
     if (this != &other)
     {
@@ -58,7 +58,7 @@ Form &Form::operator=(Form &other)
 
 // beSIgned
 
-void Form::beSigned(Bureaucrat &signer)
+void AForm::beSigned(Bureaucrat &signer)
 {
     if (this->_signed == true)
         return;
@@ -69,13 +69,19 @@ void Form::beSigned(Bureaucrat &signer)
         this->_signed = true;
     }
 }
+// Execute
 
-// << overload
-std::ostream &operator<<(std::ostream &output_stream, Form &form)
+void AForm::execute(Bureaucrat const &executor)
 {
-    output_stream << "name:" << form.getName() << std::endl;
-    output_stream << "Grade to exec:" << form.getExecGrade() << std::endl;
-    output_stream << "Grade to sign:" << form.getSignGrade() << std::endl;
-    output_stream << "Signed:" << form.getSigned() << std::endl;
+    if (executor.getGrade() > this->grade_to_sign)
+        throw GradeTooLowException();
+}
+// << overload
+std::ostream &operator<<(std::ostream &output_stream, AForm &AForm)
+{
+    output_stream << "name:" << AForm.getName() << std::endl;
+    output_stream << "Grade to exec:" << AForm.getExecGrade() << std::endl;
+    output_stream << "Grade to sign:" << AForm.getSignGrade() << std::endl;
+    output_stream << "Signed:" << AForm.getSigned() << std::endl;
     return (output_stream);
 }

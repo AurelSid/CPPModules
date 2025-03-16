@@ -6,17 +6,19 @@
 /*   By: roko <roko@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 12:46:39 by roko              #+#    #+#             */
-/*   Updated: 2025/03/13 17:07:14 by roko             ###   ########.fr       */
+/*   Updated: 2025/03/15 12:31:57 by roko             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUREAUCRAT_HPP
-#define BUREAUCRAT_HPP
+#ifndef FORM_HPP
+#define FORM_HPP
 
 #include <string>
 #include <iostream>
 #include <exception>
+#include "Bureaucrat.hpp"
 
+class Bureaucrat;
 class Form
 {
 private:
@@ -45,11 +47,10 @@ public:
     int getSignGrade(void) const;
     const std::string getName(void) const;
 
-    void grade_Increment(void);
-    void grade_Decrement(void);
-
     Form &operator=(Form &other);
+
+    void beSigned(Bureaucrat &signer);
 };
-std::ostream &operator<<(std::ostream output_stream, Form &form);
+std::ostream &operator<<(std::ostream &output_stream, Form &form);
 
 #endif

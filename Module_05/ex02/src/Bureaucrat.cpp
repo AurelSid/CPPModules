@@ -6,11 +6,11 @@
 /*   By: roko <roko@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 12:46:27 by roko              #+#    #+#             */
-/*   Updated: 2025/03/15 12:58:08 by roko             ###   ########.fr       */
+/*   Updated: 2025/03/15 17:36:11 by roko             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Bureaucrat.hpp"
+#include "../includes/Bureaucrat.hpp"
 
 // EXCEPTIONS
 const char *Bureaucrat::GradeTooHighException::what() const throw()
@@ -43,6 +43,7 @@ Bureaucrat::Bureaucrat(const Bureaucrat &other) : name(other.getName())
 // Destructor
 Bureaucrat::~Bureaucrat(void)
 {
+    std::cout << "Bureaucrat: " << this->name << " destroyed" << std::endl;
 }
 
 // Copy Operator overload
@@ -76,17 +77,17 @@ std::ostream &operator<<(std::ostream &output_stream, Bureaucrat &other)
     return (output_stream);
 };
 
-// Sign Form
-void Bureaucrat::signForm(Form &form)
+// Sign AForm
+void Bureaucrat::signAForm(AForm &AForm)
 {
-    if (form.getSigned() == true)
+    if (AForm.getSigned() == true)
     {
-        std::cout << "Form already signed" << std::endl;
+        std::cout << "AForm already signed" << std::endl;
         return;
     }
-    form.beSigned(*this);
-    if (form.getSigned() == true)
-        std::cout << this->name << " signed the form:" << form.getName() << std::endl;
+    AForm.beSigned(*this);
+    if (AForm.getSigned() == true)
+        std::cout << this->name << " signed the AForm:" << AForm.getName() << std::endl;
     else
-        std::cout << this->name << "couldnt signe the form:" << form.getName() << std::endl;
+        std::cout << this->name << "couldnt signe the AForm:" << AForm.getName() << std::endl;
 }
