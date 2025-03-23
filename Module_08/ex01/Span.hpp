@@ -6,7 +6,7 @@
 /*   By: roko <roko@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 16:44:56 by roko              #+#    #+#             */
-/*   Updated: 2025/03/21 17:29:20 by roko             ###   ########.fr       */
+/*   Updated: 2025/03/23 20:35:36 by roko             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,13 @@ class Span
 {
 public:
     Span();
+    Span(unsigned int size);
     ~Span();
     Span(Span &other);
 
     Span &operator=(Span &other);
-    void addNumber(int);
+    void addNumber(unsigned int);
+    void addMultNumbers(unsigned int);
     int shortestSpan();
     int longestSpan();
 
@@ -39,20 +41,14 @@ public:
         virtual const char *what() const throw();
     };
 
-    class emptyArrayException : public std::exception
-    {
-    public:
-        virtual const char *what() const throw();
-    };
-
-    class emptyArrayException : public std::exception
+    class maxArrayException : public std::exception
     {
     public:
         virtual const char *what() const throw();
     };
 
 private:
-    std::list<int> _array;
-    int _maxSize;
-    int _curr_size;
+    std::vector<int> _array;
+    unsigned int _maxSize;
+    unsigned int _curr_size;
 };

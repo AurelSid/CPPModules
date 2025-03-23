@@ -6,7 +6,7 @@
 #    By: roko <roko@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/21 14:32:57 by roko              #+#    #+#              #
-#    Updated: 2025/03/21 14:33:25 by roko             ###   ########.fr        #
+#    Updated: 2025/03/23 20:34:43 by roko             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
 TARGET = my_program
 
-SRCS = main.cpp
+SRCS = main.cpp 
 OBJS = $(SRCS:.cpp=.o)
 
 all: $(TARGET)
@@ -27,7 +27,9 @@ $(TARGET): $(OBJS)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -f $(OBJS)
+	
+fclean:rm -f $(OBJS) $(TARGET)
 
 re: clean all
 
