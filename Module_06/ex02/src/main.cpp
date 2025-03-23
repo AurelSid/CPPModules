@@ -6,7 +6,7 @@
 /*   By: roko <roko@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 17:07:27 by roko              #+#    #+#             */
-/*   Updated: 2025/03/19 22:06:49 by roko             ###   ########.fr       */
+/*   Updated: 2025/03/19 22:17:58 by roko             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,12 @@ void identify(Base &p)
 
 int main()
 {
-    Base *ptr = generate();
+    Base *test = generate();
 
-    identify(ptr);
-    identify(*ptr);
+    identify(test);
+    identify(*test);
 
-    delete ptr;
+    delete test;
 
     return 0;
 }
