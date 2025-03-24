@@ -3,41 +3,35 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: roko <roko@student.42.fr>                  +#+  +:+       +#+         #
+#    By: asideris <asideris@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/11 14:51:00 by roko              #+#    #+#              #
-#    Updated: 2024/11/11 17:30:51 by roko             ###   ########.fr        #
+#    Updated: 2025/03/24 17:47:52 by asideris         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# Compiler and flags
 CXX = g++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++17
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
-# Executable name
 TARGET = my_program
 
-# Source files and object files
-SRCS = main.cpp Zombie.cpp newZombie.cpp randomChump.cpp
+SRCS = main.cpp 
 OBJS = $(SRCS:.cpp=.o)
 
-# Default target
 all: $(TARGET)
 
-# Link object files to create the executable
 $(TARGET): $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS)
 
-# Compile .cpp files to .o files
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-# Clean up object files and the executable
 clean:
+	rm -f $(OBJS)
+	
+fclean:
 	rm -f $(OBJS) $(TARGET)
 
-# Phony targets to avoid conflicts
-.PHONY: all clean
+re: clean all
 
-
-
+.PHONY: all clean re

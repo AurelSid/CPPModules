@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: roko <roko@student.42.fr>                  +#+  +:+       +#+         #
+#    By: asideris <asideris@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/11 14:51:00 by roko              #+#    #+#              #
-#    Updated: 2025/03/23 20:40:37 by roko             ###   ########.fr        #
+#    Updated: 2025/03/24 13:11:26 by asideris         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,10 @@ $(TARGET): $(OBJS)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
+	rm -f $(OBJS)
+fclean:
 	rm -f $(OBJS) $(TARGET)
-re : clean all
+re : fclean all
 
 .PHONY: all clean
 
