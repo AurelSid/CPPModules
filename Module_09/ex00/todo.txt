@@ -1,0 +1,11 @@
+1.Check file.
+
+- check argc
+- check if file is txt
+- check if file can open
+
+2.Check db
+
+-check if file exists
+-check if file is csv
+-check if it can open
