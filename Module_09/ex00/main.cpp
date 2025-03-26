@@ -6,7 +6,7 @@
 /*   By: roko <roko@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:12:06 by roko              #+#    #+#             */
-/*   Updated: 2025/03/25 16:08:10 by roko             ###   ########.fr       */
+/*   Updated: 2025/03/26 13:20:56 by roko             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ int main(int argc, char *argv[])
         while (getline(file, line))
             if (line.empty())
                 throw std::runtime_error("Error: Empty line in input file.");
-        std::cout << "File opened successfully: " << argv[1] << std::endl;
     }
     catch (const std::runtime_error &e)
     {
@@ -47,7 +46,7 @@ int main(int argc, char *argv[])
         return 1;
     }
     std::ifstream file2(argv[1], std::ifstream::in);
-    std::cout << "creating new exchange" << std::endl;
+
     BitcoinExchange btc(file2, argv);
 
     return 0;
