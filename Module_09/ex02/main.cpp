@@ -1,5 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: roko <roko@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/07 21:11:59 by roko              #+#    #+#             */
+/*   Updated: 2025/04/07 23:27:51 by roko             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "PmergeMe.hpp"
 
+void print_list(std::list<int> list)
+{
+    std::list<int>::iterator it;
+    for (it = list.begin(); it != list.end(); it++)
+    {
+        std::cout << *it << " ";
+    }
+    std::cout << std::endl;
+}
 int main(int argc, char **argv)
 {
     if (argc < 3)
@@ -14,4 +35,6 @@ int main(int argc, char **argv)
                 std::cerr << "Err: Invalid input detected" << std::endl;
         }
     }
+
+    Pmerge_me list(argc, argv);
 }
