@@ -13,6 +13,7 @@
 #include <utility>
 #include <deque>
 #include <cstring>
+#include <cmath>
 
 class Pmerge_me
 {
@@ -21,10 +22,7 @@ public:
     ~Pmerge_me();
     Pmerge_me(Pmerge_me &other);
     Pmerge_me(int argc, char **argv);
-    std::list<int> start_list;
-    std::list<int> end_list;
-    void sort();
-    int nums_count;
+    void sort(std::vector<int> &vec);
 };
 
 #endif
