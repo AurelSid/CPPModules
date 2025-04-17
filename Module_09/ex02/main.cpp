@@ -6,7 +6,7 @@
 /*   By: roko <roko@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 21:11:59 by roko              #+#    #+#             */
-/*   Updated: 2025/04/09 12:09:58 by roko             ###   ########.fr       */
+/*   Updated: 2025/04/15 15:09:51 by roko             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,14 @@ int main(int argc, char **argv)
         for (size_t j = 0; j < std::strlen(argv[i]); j++)
         {
             if (!isdigit(argv[i][j]))
+            {
                 std::cerr << "Err: Invalid input detected" << std::endl;
+                return (0);
+            }
         }
     }
-
+    clock_t before = clock();
     Pmerge_me list(argc, argv);
+    clock_t duration = clock() - before;
+    std::cout << "Duration: " << (float)duration / CLOCKS_PER_SEC << " seconds" << std::endl;
 }

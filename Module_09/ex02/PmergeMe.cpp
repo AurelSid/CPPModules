@@ -27,9 +27,17 @@ Pmerge_me::Pmerge_me(int argc, char **argv)
     std::vector<int> _list;
     for (int i = 1; i < argc; i++)
     {
-        _list.push_back(atoi(argv[i]));
-        // std::cout << argv[i] << " pushed to list" << std::endl;
+        int val = atoi(argv[i]);
+        if (std::find(_list.begin(), _list.end(), val) == _list.end())
+        {
+            _list.push_back(val);
+        }
+        else
+        {
+            std::cerr << "Duplicate value: " << val << " ignored." << std::endl;
+        }
     }
+
     sort(_list);
 }
 Pmerge_me::~Pmerge_me()
@@ -53,14 +61,17 @@ static std::vector<int>::iterator check_all_insert(int gr_size, std::vector<int>
 
     for (std::vector<int>::iterator it = main.begin() + gr_size - 1; it + gr_size <= main.end(); it += gr_size)
     {
-        (void)last_val;
         std::cout << "Checking: " << *it << std::endl;
 
         if (last_val > *it)
         {
+            if (it + gr_size >= main.end())
+                return main.end();
             if (last_val < *(it + gr_size))
 
+            {
                 return it;
+            }
         }
         else
         {
@@ -78,8 +89,10 @@ static void insert_range(int gr_size,
 {
     if (range_start + gr_size > pend.end())
         return;
-
-    main.insert(insert_pos + 1, range_start, range_start + gr_size);
+    if (insert_pos == main.end())
+        main.insert(insert_pos, range_start, range_start + gr_size);
+    else
+        main.insert(insert_pos + 1, range_start, range_start + gr_size);
     pend.erase(range_start, range_start + gr_size);
 }
 
@@ -132,8 +145,12 @@ void Pmerge_me::sort(std::vector<int> &vec)
 
     for (std::vector<int>::iterator it = start + gr_size; it + gr_size * 2 <= vec.end(); it += gr_size * 2)
     {
+        std::cout << "XX" << std::endl;
         for (std::vector<int>::iterator it_2 = it; it_2 < (it + gr_size); it_2++)
+        {
             main.push_back(*it_2);
+            print_grouped_vector(main, gr_size);
+        }
     }
 
     for (std::vector<int>::iterator it = start + gr_size * 2; it + gr_size <= vec.end(); it += gr_size * 2)
@@ -143,6 +160,7 @@ void Pmerge_me::sort(std::vector<int> &vec)
     }
 
     std::cout << "END: " << *end << std::endl;
+    std::cout << "S: " << *start << std::endl;
     for (std::vector<int>::iterator it = end; it < vec.end(); it++)
         non_sorted.push_back(*it);
 
@@ -171,6 +189,7 @@ void Pmerge_me::sort(std::vector<int> &vec)
 
         while (reps)
         {
+
             std::vector<int>::iterator last_val = pend.begin() + (gr_size * reps - 1);
             std::vector<int>::iterator from_here = last_val - gr_size + 1;
 
