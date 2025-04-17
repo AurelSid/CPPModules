@@ -61,17 +61,14 @@ static std::vector<int>::iterator check_all_insert(int gr_size, std::vector<int>
 
     for (std::vector<int>::iterator it = main.begin() + gr_size - 1; it + gr_size <= main.end(); it += gr_size)
     {
+        (void)last_val;
         std::cout << "Checking: " << *it << std::endl;
 
         if (last_val > *it)
         {
-            if (it + gr_size >= main.end())
-                return main.end();
             if (last_val < *(it + gr_size))
 
-            {
                 return it;
-            }
         }
         else
         {
@@ -145,12 +142,8 @@ void Pmerge_me::sort(std::vector<int> &vec)
 
     for (std::vector<int>::iterator it = start + gr_size; it + gr_size * 2 <= vec.end(); it += gr_size * 2)
     {
-        std::cout << "XX" << std::endl;
         for (std::vector<int>::iterator it_2 = it; it_2 < (it + gr_size); it_2++)
-        {
             main.push_back(*it_2);
-            print_grouped_vector(main, gr_size);
-        }
     }
 
     for (std::vector<int>::iterator it = start + gr_size * 2; it + gr_size <= vec.end(); it += gr_size * 2)
