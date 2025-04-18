@@ -22,7 +22,8 @@ public:
     ~Pmerge_me();
     Pmerge_me(Pmerge_me &other);
     Pmerge_me(int argc, char **argv);
-    void sort(std::vector<int> &vec);
+    template <typename T>
+    void sort(T &vec);
 };
 
 #endif
