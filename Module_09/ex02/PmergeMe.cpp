@@ -1,29 +1,31 @@
 #include "PmergeMe.hpp"
 
-// static void print_grouped_vector(const std::vector<int> &vec, int gr_size)
-// {
-//     if (vec.empty())
-//     {
-//         std::cout << "[empty]" << std::endl;
-//         return;
-//     }
-
-//     for (size_t i = 0; i < vec.size(); i += gr_size)
-//     {
-//         std::cout << "[";
-//         for (int j = 0; j < gr_size && (i + j) < vec.size(); j++)
-//         {
-//             std::cout << vec[i + j];
-//             if (j != gr_size - 1 && (i + j + 1) < vec.size())
-//                 std::cout << ",";
-//         }
-//         std::cout << "]";
-//     }
-//     std::cout << std::endl;
-// }
-static void print_list(std::vector<int> &vec)
+template <typename T>
+static void print_grouped_vector(const T &vec, int gr_size)
 {
-    for (std::vector<int>::iterator it = vec.begin(); it < vec.end(); it++)
+    if (vec.empty())
+    {
+        std::cout << "[empty]" << std::endl;
+        return;
+    }
+
+    for (size_t i = 0; i < vec.size(); i += gr_size)
+    {
+        std::cout << "[";
+        for (int j = 0; j < gr_size && (i + j) < vec.size(); j++)
+        {
+            std::cout << vec[i + j];
+            if (j != gr_size - 1 && (i + j + 1) < vec.size())
+                std::cout << ",";
+        }
+        std::cout << "]";
+    }
+    std::cout << std::endl;
+}
+template <typename T>
+static void print_list(T &vec)
+{
+    for (typename T::iterator it = vec.begin(); it != vec.end(); it++)
         std::cout << *it << " ";
     std::cout << std::endl;
 }
@@ -31,24 +33,44 @@ static void print_list(std::vector<int> &vec)
 Pmerge_me::Pmerge_me(int argc, char **argv)
 {
     std::vector<int> _list;
+    std::deque<int> _d;
     for (int i = 1; i < argc; i++)
     {
         int val = atoi(argv[i]);
         if (std::find(_list.begin(), _list.end(), val) == _list.end())
         {
             _list.push_back(val);
+            _d.push_back(val);
         }
-        // else
-        // {
-        // std::cerr << "Duplicate value: " << val << " ignored." << std::endl;
-        // }
+        else
+        {
+            std::cerr << "Duplicate value: " << val << " ignored." << std::endl;
+            return;
+        }
     }
-    // std::cerr << "Before sorting: " << std::endl;
-    print_list(_list);
-    sort(_list);
-    // std::cerr << "After sorting: " << std::endl;
 
+    std::cerr << "Before sorting Vec: " << std::endl;
     print_list(_list);
+    std::cerr << "Before sorting Deque: " << std::endl;
+    print_list(_d);
+
+    clock_t before = clock();
+    sort(_list);
+    clock_t duration = clock() - before;
+    std::cerr << "============================" << std::endl;
+    std::cerr << "============================" << std::endl;
+    std::cerr << "After sorting Vector: " << std::endl;
+    print_list(_list);
+    std::cout << "----------> Duration: " << (float)duration / CLOCKS_PER_SEC << " seconds" << std::endl;
+
+    before = clock();
+    sort(_d);
+    duration = clock() - before;
+    std::cerr << "============================" << std::endl;
+    std::cerr << "============================" << std::endl;
+    std::cerr << "After sorting Deque: " << std::endl;
+    print_list(_d);
+    std::cout << "----------> Duration: " << (float)duration / CLOCKS_PER_SEC << " seconds" << std::endl;
 }
 Pmerge_me::~Pmerge_me()
 {
@@ -66,44 +88,42 @@ static int jacobsthal(int k)
 {
     return round((pow(2, k + 1) + pow(-1, k)) / 3);
 }
-static std::vector<int>::iterator check_all_insert(int gr_size, std::vector<int> &main, int last_val)
+template <typename T>
+static typename T::iterator check_all_insert(int gr_size, T &main, int last_val)
 {
-    // Create a vector of group endpoints for binary search
-    std::vector<int> group_endpoints;
+
+    T group_endpoints;
     for (size_t i = gr_size - 1; i < main.size(); i += gr_size)
     {
         group_endpoints.push_back(main[i]);
     }
 
-    // Use upper_bound to find the first endpoint greater than last_val
-    std::vector<int>::iterator upper = std::upper_bound(group_endpoints.begin(), group_endpoints.end(), last_val);
+    typename T::iterator upper = std::upper_bound(group_endpoints.begin(), group_endpoints.end(), last_val);
 
-    // If all endpoints are smaller than last_val, insert at end
     if (upper == group_endpoints.end())
     {
-        // std::cout << last_val << " is the biggest" << std::endl;
         return main.end();
     }
 
-    // Otherwise, find the position in the main vector
     size_t group_index = upper - group_endpoints.begin();
-    std::vector<int>::iterator position = main.begin() + (group_index * gr_size);
+    typename T::iterator position = main.begin() + (group_index * gr_size);
 
-    // std::cout << last_val << " should be inserted before group with endpoint: " << group_endpoints[group_index] << std::endl;
     return position;
 }
+template <typename T>
 static void insert_range(int gr_size,
-                         std::vector<int> &main,
-                         std::vector<int> &pend,
-                         std::vector<int>::iterator insert_pos,
-                         std::vector<int>::iterator range_start)
+                         T &main,
+                         T &pend,
+                         typename T::iterator insert_pos,
+                         typename T::iterator range_start)
 {
     if (range_start + gr_size > pend.end())
         return;
     main.insert(insert_pos, range_start, range_start + gr_size);
     pend.erase(range_start, range_start + gr_size);
 }
-void Pmerge_me::sort(std::vector<int> &vec)
+template <typename T>
+void Pmerge_me::sort(T &vec)
 {
     static int gr_size = 1;
     int gr_count = vec.size() / gr_size;
@@ -116,8 +136,8 @@ void Pmerge_me::sort(std::vector<int> &vec)
         return;
     }
 
-    std::vector<int>::iterator start = vec.begin();
-    std::vector<int>::iterator end = vec.begin();
+    typename T::iterator start = vec.begin();
+    typename T::iterator end = vec.begin();
 
     if (!groups_num_is_even(gr_count))
     {
@@ -128,7 +148,7 @@ void Pmerge_me::sort(std::vector<int> &vec)
         end = vec.begin() + (gr_size * gr_count) - gr_size;
 
     //    std::cout << "Swapping elements in adjacent groups if needed..." << std::endl;
-    for (std::vector<int>::iterator it = vec.begin(); it + gr_size * 2 <= vec.end(); it += gr_size * 2)
+    for (typename T::iterator it = vec.begin(); it + gr_size * 2 <= vec.end(); it += gr_size * 2)
     {
 
         if (*(it + gr_size - 1) > *(it + (gr_size * 2) - 1))
@@ -144,29 +164,29 @@ void Pmerge_me::sort(std::vector<int> &vec)
 
     // std::cout << "=== MERGING STAGE: gr_size = " << gr_size << " ===" << std::endl;
 
-    std::vector<int> main;
-    std::vector<int> pend;
-    std::vector<int> non_sorted;
+    T main;
+    T pend;
+    T non_sorted;
 
     // print_grouped_vector(vec, gr_size);
-    for (std::vector<int>::iterator it = start; it < (start + gr_size); it++)
+    for (typename T::iterator it = start; it < (start + gr_size); it++)
         main.push_back(*it);
 
-    for (std::vector<int>::iterator it = start + gr_size; it + gr_size * 2 <= vec.end(); it += gr_size * 2)
+    for (typename T::iterator it = start + gr_size; it + gr_size * 2 <= vec.end(); it += gr_size * 2)
     {
-        for (std::vector<int>::iterator it_2 = it; it_2 < (it + gr_size); it_2++)
+        for (typename T::iterator it_2 = it; it_2 < (it + gr_size); it_2++)
             main.push_back(*it_2);
     }
 
-    for (std::vector<int>::iterator it = start + gr_size * 2; it + gr_size <= vec.end(); it += gr_size * 2)
+    for (typename T::iterator it = start + gr_size * 2; it + gr_size <= vec.end(); it += gr_size * 2)
     {
-        for (std::vector<int>::iterator it_2 = it; it_2 < (it + gr_size); it_2++)
+        for (typename T::iterator it_2 = it; it_2 < (it + gr_size); it_2++)
             pend.push_back(*it_2);
     }
 
     // std::cout << "END: " << *end << std::endl;
     // std::cout << "S: " << *start << std::endl;
-    for (std::vector<int>::iterator it = end; it < vec.end(); it++)
+    for (typename T::iterator it = end; it != vec.end(); it++)
         non_sorted.push_back(*it);
 
     // std::cout << "Current main: ";
@@ -185,7 +205,10 @@ void Pmerge_me::sort(std::vector<int> &vec)
 
         // std::cout << "--- Jacobsthal k=" << k << ", curr=" << curr_jacobsthal << ", prev=" << prev_jacobsthal << ", reps=" << reps << " ---" << std::endl;
 
-        if ((size_t)(curr_jacobsthal * gr_size) > vec.size())
+        // std::cout << "Checking: curr_jacobsthal * gr_size = " << curr_jacobsthal * gr_size
+        //   << ", vec size = " << vec.size() << std::endl;
+
+        if (curr_jacobsthal * gr_size > (int)vec.size())
         {
             // std::cout << "Breaking Jacobsthal loop: index out of bounds" << std::endl;
             break;
@@ -194,12 +217,13 @@ void Pmerge_me::sort(std::vector<int> &vec)
         while (reps)
         {
 
-            std::vector<int>::iterator last_val = pend.begin() + (gr_size * reps - 1);
-            std::vector<int>::iterator from_here = last_val - gr_size + 1;
+            typename T::iterator last_val = pend.begin() + (gr_size * reps - 1);
 
-            // std::cout << "Inserting group ending with value: " << *last_val << std::endl;
+            typename T::iterator from_here = last_val - gr_size + 1;
+            if (last_val >= pend.end())
+                last_val = pend.end();
 
-            std::vector<int>::iterator insert_here = check_all_insert(gr_size, main, *last_val);
+            typename T::iterator insert_here = check_all_insert(gr_size, main, *last_val);
 
             // if (insert_here == main.end())
             //     std::cout << "Insert position is end of main" << std::endl;

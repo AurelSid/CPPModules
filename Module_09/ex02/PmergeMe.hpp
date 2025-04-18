@@ -14,6 +14,7 @@
 #include <deque>
 #include <cstring>
 #include <cmath>
+#include <iterator>
 
 class Pmerge_me
 {
@@ -22,7 +23,8 @@ public:
     ~Pmerge_me();
     Pmerge_me(Pmerge_me &other);
     Pmerge_me(int argc, char **argv);
-    void sort(std::vector<int> &vec);
+    template <typename T>
+    void sort(T &vec);
 };
 
 #endif

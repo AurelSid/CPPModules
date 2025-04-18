@@ -29,8 +29,6 @@ int main(int argc, char **argv)
             }
         }
     }
-    clock_t before = clock();
+
     Pmerge_me list(argc, argv);
-    clock_t duration = clock() - before;
-    std::cout << "Duration: " << (float)duration / CLOCKS_PER_SEC << " seconds" << std::endl;
 }
